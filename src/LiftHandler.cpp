@@ -21,9 +21,17 @@ void LiftHandler::onDataReceived(int why) {
     if (!Wire.available()) {
         return;
     }
+    Serial.print(packet_id);
+    Serial.print(", ");
+    Serial.print(why);
+    Serial.print(", ");
+    Serial.println(Wire.available());
     auto* data = new uint8_t[Wire.available()];
+    Serial.println("Before readBytes");
     uint8_t size = Wire.readBytes(data, Wire.available());
+    Serial.println("before payload_handler");
     payload_handler[packet_id](data, size, *this);
+    Serial.println("after payload_handler");
     delete[] data;
 }
 
@@ -112,6 +120,7 @@ MAKE_PAYLOAD_FUNCTION(setMaxSpeed,
     lift.changed = true;
     )
 MAKE_PAYLOAD_FUNCTION(setAcceleration,
+    Serial.println("Inside ACC");
     auto acc = (int16_t*)data;
     lift.acc = static_cast<float>(*acc);
     lift.changed = true;
