@@ -51,6 +51,8 @@ struct LiftHandler {
 
     void syncAction();
 
+    void doHoming();
+
     float getMaxSpeed() const;
 
     float getAcc() const;

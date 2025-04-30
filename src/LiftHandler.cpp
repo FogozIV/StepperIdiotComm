@@ -71,6 +71,10 @@ void LiftHandler::setTarget(int target) {
     this->changed = true;
 }
 
+void LiftHandler::doHoming() {
+
+}
+
 
 MAKE_PAYLOAD_FUNCTION(setTargetPos,
     auto pos = (int16_t*)data;
@@ -100,7 +104,7 @@ MAKE_PAYLOAD_FUNCTION(setRMSCurrent,
 )
 
 MAKE_PAYLOAD_FUNCTION(doHoming,
-
+    lift.doHoming();
 )
 
 
