@@ -76,10 +76,12 @@ void LiftHandler::setTarget(int target) {
 }
 
 void LiftHandler::noticeButtonInterrupt() {
-    homing_mode = false;
-    stepper.setSpeed(0);
-    stepper.setCurrentPosition(0);
-    setTarget(0);
+    if (homing_mode) {
+        homing_mode = false;
+        stepper.setSpeed(0);
+        stepper.setCurrentPosition(0);
+        setTarget(0);
+    }
 }
 
 void LiftHandler::doHoming() {
