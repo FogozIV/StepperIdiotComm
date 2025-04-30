@@ -18,12 +18,9 @@ void LiftHandler::onDataReceived(int why) {
     }else {
         return;
     }
-    Serial.println("Received I2C");
-    Serial.println(packet_id);
     if (!Wire.available()) {
         return;
     }
-    Serial.println(Wire.available());
     auto* data = new uint8_t[Wire.available()];
     uint8_t size = Wire.readBytes(data, Wire.available());
     payload_handler[packet_id](data, size, *this);
@@ -45,6 +42,12 @@ void LiftHandler::syncAction() {
     }
     if(!changed)
         return;
+    Serial.print("Max speed: ");
+    Serial.print(max_speed);
+    Serial.print(" Acceleration: ");
+    Serial.print(acc);
+    Serial.println(" Target: ");
+    Serial.println(target);
     stepper.setMaxSpeed(max_speed);
     stepper.setAcceleration(acc);
     stepper.moveTo(target);
@@ -97,9 +100,6 @@ MAKE_PAYLOAD_FUNCTION(setTargetPos,
     auto pos = (int16_t*)data;
     lift.target = *pos;
     lift.changed = true;
-    Serial.print("Received target ");
-    Serial.print(lift.target);
-    Serial.println();
 )
 
 MAKE_PAYLOAD_FUNCTION(setCurrentPos,
