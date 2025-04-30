@@ -64,10 +64,14 @@ void setup() {
 
     driver.begin();
     driver.rms_current(700);
-
+    stepper.setMaxSpeed(1000);
+    stepper.setAcceleration(1000);
     stepper.setEnablePin(ENABLE_PIN);
     stepper.setPinsInverted(false, false, true);
     stepper.enableOutputs();
+
+    stepper.moveTo(1500);
+    while (stepper.run());
 
 }
 
