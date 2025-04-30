@@ -140,7 +140,7 @@ MAKE_PAYLOAD_FUNCTION(isMoving,
 
 
 
-PayloadHandler payload_handler[20] = {
+PayloadHandler payload_handler[] = {
         [0x00] = setTargetPos,
         [0x01] = setCurrentPos,
         [0x02] = setMaxSpeed,

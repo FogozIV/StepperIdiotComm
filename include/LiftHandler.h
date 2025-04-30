@@ -32,7 +32,7 @@ inline void emptyI2C() {
     }
 }
 
-extern PayloadHandler payload_handler[20];
+extern PayloadHandler payload_handler[];
 struct LiftHandler {
     bool changed = false;
     int target = 0;
