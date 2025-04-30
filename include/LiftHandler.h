@@ -41,6 +41,7 @@ struct LiftHandler {
     AccelStepper& stepper;
     TMC2209Stepper& driver;
     void (*responseHandler)(LiftHandler&);
+    bool homing_mode = false;
 
     LiftHandler(AccelStepper &stepper, TMC2209Stepper &driver);
     LiftHandler() = delete;
@@ -64,6 +65,8 @@ struct LiftHandler {
     void setAcc(float acc);
 
     void setTarget(int target);
+
+    void noticeButtonInterrupt();
 
 };
 

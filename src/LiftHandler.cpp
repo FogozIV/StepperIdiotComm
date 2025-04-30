@@ -35,7 +35,11 @@ void LiftHandler::onDataRequest() {
 }
 
 void LiftHandler::syncAction() {
-    stepper.run();
+    if (!homing_mode) {
+        stepper.run();
+    }else {
+        stepper.runSpeed();
+    }
     if(!changed)
         return;
     stepper.setMaxSpeed(max_speed);
@@ -71,8 +75,16 @@ void LiftHandler::setTarget(int target) {
     this->changed = true;
 }
 
-void LiftHandler::doHoming() {
+void LiftHandler::noticeButtonInterrupt() {
+    homing_mode = false;
+    stepper.setSpeed(0);
+    stepper.setCurrentPosition(0);
+    setTarget(0);
+}
 
+void LiftHandler::doHoming() {
+    homing_mode = true;
+    stepper.setSpeed(-200);
 }
 
 
