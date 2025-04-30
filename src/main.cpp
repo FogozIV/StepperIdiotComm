@@ -23,7 +23,7 @@ bool button_state;
 void stallInterrupt() {
 
 }
-
+/*
 ISR(PCINT0_vect) {
     if (button_state && !digitalRead(BUTTON_PIN)) {
         lift_handler.noticeButtonInterrupt();
@@ -32,8 +32,7 @@ ISR(PCINT0_vect) {
         button_state = true;
     }
 
-
-}
+}*/
 
 void receiveEvent(int i) {
     lift_handler.onDataReceived(i);
@@ -45,6 +44,7 @@ void requestEvent() {
 
 void setup() {
     SERIAL_PORT.begin(115200);
+    Serial.println("Hello World!");
     pinMode(INDEX_PIN, INPUT);
     pinMode(DIAG_PIN, INPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
