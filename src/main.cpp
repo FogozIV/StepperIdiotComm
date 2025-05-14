@@ -65,7 +65,7 @@ void setup() {
     Wire.onRequest(requestEvent);
 
     driver.begin();
-    driver.rms_current(200);
+    driver.rms_current(2000);
     driver.pwm_autoscale(true);
     driver.microsteps(8);
     driver.TCOOLTHRS(0xFFFFF); // 20bit max
