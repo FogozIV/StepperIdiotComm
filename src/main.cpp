@@ -72,6 +72,7 @@ void setup() {
     driver.SGTHRS(STALL_VALUE);
     driver.COOLCONF(0xFFFFF);
     driver.ihold(31);
+    driver.hold_multiplier(1);
     uint8_t connTest = driver.test_connection();
     Serial.println(connTest);
     stepper.setMaxSpeed(1000);
