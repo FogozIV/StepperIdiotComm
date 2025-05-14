@@ -43,7 +43,7 @@ void requestEvent() {
 void setup() {
     pinMode(0, OUTPUT);
     pinMode(1, OUTPUT);
-    digitalWrite(0, LOW);
+    digitalWrite(0, HIGH);
     digitalWrite(1, HIGH);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
     button_state = digitalRead(BUTTON_PIN);
