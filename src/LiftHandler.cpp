@@ -176,6 +176,6 @@ PayloadHandler payload_handler[] = {
         [0x07] = getCurrentPos,
         [0x08] = getCurrentAcc,
         [0x09] = isMoving,
-        [0x10] = shutdown,
-        [0x11] = turnOn,
+        [0x0A] = shutdown,
+        [0x0B] = turnOn
 };
