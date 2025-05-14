@@ -122,7 +122,13 @@ MAKE_PAYLOAD_FUNCTION(doHoming,
     lift.doHoming();
 )
 
+MAKE_PAYLOAD_FUNCTION(shutdown,
+    lift.driver.disable();
+)
 
+MAKE_PAYLOAD_FUNCTION(turnOn,
+    lift.driver.enable();
+)
 
 MAKE_PAYLOAD_RESPONSE_FUNCTION(currentPosResponse,
     WRITE_TYPE_BUFFER_WIRE(lift.stepper.currentPosition(), int16_t)
@@ -170,4 +176,6 @@ PayloadHandler payload_handler[] = {
         [0x07] = getCurrentPos,
         [0x08] = getCurrentAcc,
         [0x09] = isMoving,
+        [0x10] = shutdown,
+        [0x11] = turnOn,
 };
