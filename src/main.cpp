@@ -68,6 +68,7 @@ void setup() {
     driver.microsteps(8);
     driver.TCOOLTHRS(0xFFFFF); // 20bit max
     driver.SGTHRS(STALL_VALUE);
+    driver.ihold(31);
     stepper.setMaxSpeed(1000);
     stepper.setAcceleration(1000);
     stepper.setEnablePin(ENABLE_PIN);
