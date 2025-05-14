@@ -80,9 +80,6 @@ void setup() {
     stepper.setPinsInverted(false, false, true);
     stepper.enableOutputs();
 
-    stepper.moveTo(1500);
-    while (stepper.run());
-
 }
 
 void loop() {
