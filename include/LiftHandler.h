@@ -6,6 +6,8 @@
 #define LIFTHANDLER_H
 #include <AccelStepper.h>
 #include <Wire.h>
+
+#include "TMC2209.h"
 struct LiftHandler;
 #define MAKE_PAYLOAD_FUNCTION(name, body) void name(uint8_t *data, size_t size, LiftHandler& lift){\
 body\
@@ -38,11 +40,11 @@ struct LiftHandler {
     float max_speed = 1000;
     float acc = 1500;
     AccelStepper& stepper;
-    TMC2209Stepper& driver;
+    TMC2209& driver;
     void (*responseHandler)(LiftHandler&);
     bool homing_mode = false;
 
-    LiftHandler(AccelStepper &stepper, TMC2209Stepper &driver);
+    LiftHandler(AccelStepper &stepper, TMC2209 &driver);
     LiftHandler() = delete;
 
     void onDataReceived(int data);
