@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <AccelStepper.h>
-#include <TMCStepper.h>
+#include <TMC2209.h>
 #include <Wire.h>
 #include "LiftHandler.h"
 
@@ -16,7 +16,7 @@
 
 #define R_SENSE 0.11f
 #define STALL_VALUE 25
-TMC2209Stepper driver(&SERIAL_PORT, R_SENSE, DRIVER_ADDRESS);
+TMC2209  driver;
 AccelStepper stepper(AccelStepper::DRIVER, STEP_PIN, DIR_PIN);
 LiftHandler lift_handler(stepper, driver);
 bool button_state;
@@ -47,6 +47,8 @@ void setup() {
     SERIAL_PORT.begin(115200);
     Serial.begin(115200);
     delay(4000);
+    driver.setup(Serial1);
+
     pinMode(INDEX_PIN, INPUT);
     pinMode(DIAG_PIN, INPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
@@ -64,17 +66,9 @@ void setup() {
     Wire.onReceive(receiveEvent);
     Wire.onRequest(requestEvent);
 
-    driver.begin();
-    driver.rms_current(2000);
-    driver.pwm_autoscale(true);
-    driver.microsteps(8);
-    driver.TCOOLTHRS(0xFFFFF); // 20bit max
-    driver.SGTHRS(STALL_VALUE);
-    driver.COOLCONF(0xFFFFF);
-    driver.ihold(31);
-    driver.hold_multiplier(1);
-    uint8_t connTest = driver.test_connection();
-    Serial.println(connTest);
+    driver.setRMSCurrent(2000, R_SENSE, 1);
+    driver.setHoldCurrent(100);
+
     stepper.setMaxSpeed(1000);
     stepper.setAcceleration(1000);
     stepper.setEnablePin(ENABLE_PIN);

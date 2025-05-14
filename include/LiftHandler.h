@@ -5,7 +5,6 @@
 #ifndef LIFTHANDLER_H
 #define LIFTHANDLER_H
 #include <AccelStepper.h>
-#include <TMCStepper.h>
 #include <Wire.h>
 struct LiftHandler;
 #define MAKE_PAYLOAD_FUNCTION(name, body) void name(uint8_t *data, size_t size, LiftHandler& lift){\
