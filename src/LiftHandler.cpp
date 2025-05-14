@@ -123,11 +123,11 @@ MAKE_PAYLOAD_FUNCTION(doHoming,
 )
 
 MAKE_PAYLOAD_FUNCTION(shutdown,
-    lift.driver.disable();
+    lift.stepper.disableOutputs();
 )
 
 MAKE_PAYLOAD_FUNCTION(turnOn,
-    lift.driver.enable();
+    lift.stepper.enableOutputs();
 )
 
 MAKE_PAYLOAD_RESPONSE_FUNCTION(currentPosResponse,
