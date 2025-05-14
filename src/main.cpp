@@ -45,6 +45,7 @@ void requestEvent() {
 
 void setup() {
     SERIAL_PORT.begin(115200);
+    delay(4000);
     pinMode(INDEX_PIN, INPUT);
     pinMode(DIAG_PIN, INPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
