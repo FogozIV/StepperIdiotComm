@@ -45,8 +45,6 @@ void setup() {
     pinMode(1, OUTPUT);
     digitalWrite(0, LOW);
     digitalWrite(1, HIGH);
-    pinMode(INDEX_PIN, INPUT);
-    pinMode(DIAG_PIN, INPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
     button_state = digitalRead(BUTTON_PIN);
 
@@ -54,8 +52,6 @@ void setup() {
     pinMode(DIR_PIN, OUTPUT);
     pinMode(STEP_PIN, OUTPUT);
     pinMode(ENABLE_PIN, OUTPUT);
-    attachInterrupt(digitalPinToInterrupt(DIAG_PIN), stallInterrupt, RISING);
-    PCMSK0 |= 1 << PCINT7;
 
 
     Wire.begin(0x22);
