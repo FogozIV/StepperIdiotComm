@@ -12,7 +12,7 @@
 #define BUTTON_PIN 11
 
 #define DRIVER_ADDRESS 0b00
-#define SERIAL_PORT Serial
+#define SERIAL_PORT Serial1
 
 #define R_SENSE 0.11f
 #define STALL_VALUE 25
@@ -45,6 +45,7 @@ void requestEvent() {
 
 void setup() {
     SERIAL_PORT.begin(115200);
+    Serial.begin(115200);
     delay(4000);
     pinMode(INDEX_PIN, INPUT);
     pinMode(DIAG_PIN, INPUT);
