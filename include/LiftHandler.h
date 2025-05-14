@@ -39,11 +39,10 @@ struct LiftHandler {
     float max_speed = 1000;
     float acc = 1500;
     AccelStepper& stepper;
-    TMC2209Stepper& driver;
-    void (*responseHandler)(LiftHandler&);
+    void (*responseHandler)(LiftHandler&) = nullptr;
     bool homing_mode = false;
 
-    LiftHandler(AccelStepper &stepper, TMC2209Stepper &driver);
+    LiftHandler(AccelStepper &stepper);
     LiftHandler() = delete;
 
     void onDataReceived(int data);

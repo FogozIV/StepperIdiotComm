@@ -5,8 +5,7 @@
 #include "LiftHandler.h"
 
 
-LiftHandler::LiftHandler(AccelStepper &stepper, TMC2209Stepper &driver): stepper(stepper),
-                                                                         driver(driver) {
+LiftHandler::LiftHandler(AccelStepper &stepper): stepper(stepper) {
     stepper.setMaxSpeed(max_speed);
     stepper.setAcceleration(acc);
 }
@@ -115,7 +114,6 @@ MAKE_PAYLOAD_FUNCTION(setAcceleration,
 
 MAKE_PAYLOAD_FUNCTION(setRMSCurrent,
     auto current = (int16_t*)data;
-    lift.driver.rms_current(*current);
 )
 
 MAKE_PAYLOAD_FUNCTION(doHoming,

@@ -14,11 +14,8 @@
 #define DRIVER_ADDRESS 0b00
 #define SERIAL_PORT Serial
 
-#define R_SENSE 0.11f
-#define STALL_VALUE 25
-TMC2209Stepper driver(&SERIAL_PORT, R_SENSE, DRIVER_ADDRESS);
 AccelStepper stepper(AccelStepper::DRIVER, STEP_PIN, DIR_PIN);
-LiftHandler lift_handler(stepper, driver);
+LiftHandler lift_handler(stepper);
 bool button_state;
 
 void stallInterrupt() {
@@ -44,8 +41,10 @@ void requestEvent() {
 }
 
 void setup() {
-    SERIAL_PORT.begin(115200);
-    delay(4000);
+    pinMode(0, OUTPUT);
+    pinMode(1, OUTPUT);
+    digitalWrite(0, LOW);
+    digitalWrite(1, HIGH);
     pinMode(INDEX_PIN, INPUT);
     pinMode(DIAG_PIN, INPUT);
     pinMode(BUTTON_PIN, INPUT_PULLUP);
@@ -63,16 +62,6 @@ void setup() {
     Wire.onReceive(receiveEvent);
     Wire.onRequest(requestEvent);
 
-    driver.begin();
-    driver.rms_current(200);
-    driver.pwm_autoscale(true);
-    driver.microsteps(8);
-    driver.TCOOLTHRS(0xFFFFF); // 20bit max
-    driver.SGTHRS(STALL_VALUE);
-    driver.COOLCONF(0xFFFFF);
-    driver.ihold(31);
-    uint8_t connTest = driver.test_connection();
-    Serial.println(connTest);
     stepper.setMaxSpeed(1000);
     stepper.setAcceleration(1000);
     stepper.setEnablePin(ENABLE_PIN);
