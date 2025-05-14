@@ -78,7 +78,7 @@ void setup() {
     stepper.setMaxSpeed(1000);
     stepper.setAcceleration(1000);
     stepper.setEnablePin(ENABLE_PIN);
-    stepper.setPinsInverted(false, false, true);
+    stepper.setPinsInverted(true, false, true);
     stepper.enableOutputs();
 
 }
